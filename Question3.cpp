@@ -5,6 +5,7 @@
 // Date: 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ using namespace std;
 //     demonstrate friendship.  DO NOT USE FLOATING POINT MATH!!!
 // 3.2 Overload two functions called "add" which take two arguements, an integer and a fraction (in 
 //     either order) and return a fraction.  
-// 3.3 create a driver program to test your overloaded > operators and your overloaded 
+// 3.3 create a driver program to test your overloaded > operators and your overloaded functions
 
 class Fraction {
 private:
@@ -24,5 +25,20 @@ private:
 public:
 	Fraction(int n, int d) : num(n), denom(d) { };
 	void print() { cout << num << "/" << denom; };
-	friend istream &operator>>(istream &input, Fraction &fract);
+friend bool operator > (const Fraction &obj1, const Fraction &obj2);
+  friend  Fraction add(int, Fraction);
+	friend	 Fraction add(Fraction, int);
 };
+Fraction add(int number, Fraction a){
+	
+	a.num = number * a.denom + a.num;
+	return a;
+}
+Fraction add(Fraction b, int number1){
+	b.num = number1 * b.denom + b.num;
+	return b;
+}
+
+bool operator > (const Fraction &obj1, const Fraction &obj2){
+	double left = static_cast<double>(obj1.num) / obj1.denom;
+}
