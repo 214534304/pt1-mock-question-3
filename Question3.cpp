@@ -22,6 +22,7 @@ private:
 	int num;				// numerator;
 	int denom;				// denominator;
 public:
-	Fraction(int n, int d) : num(n), denum(d) { };
+	Fraction(int n, int d) : num(n), denom(d) { };
 	void print() { cout << num << "/" << denom; };
+	friend istream &operator>>(istream &input, Fraction &fract);
 };
