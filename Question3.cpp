@@ -24,21 +24,43 @@ private:
 	int denom;				// denominator;
 public:
 	Fraction(int n, int d) : num(n), denom(d) { };
+
+	Fraction() : num(0), denom(0)
+	{
+	}
+	~Fraction(){
+	}
 	void print() { cout << num << "/" << denom; };
-friend bool operator > (const Fraction &obj1, const Fraction &obj2);
+
+	friend Fraction operator > (const Fraction &obj1, const Fraction &obj2);          //  overload the greater than operator and giving it access to the class members 
+
+	//overloading two functions called add to take two arguments
+
   friend  Fraction add(int, Fraction);
+
 	friend	 Fraction add(Fraction, int);
 };
 Fraction add(int number, Fraction a){
 	
 	a.num = number * a.denom + a.num;
+	a.denom = a.denom * 1;
 	return a;
 }
-Fraction add(Fraction b, int number1){
-	b.num = number1 * b.denom + b.num;
+Fraction add(Fraction b, int number){
+	
+	b.num = number * b.denom + b.num;
+	b.denom = b.denom * 1;
 	return b;
 }
 
-bool operator > (const Fraction &obj1, const Fraction &obj2){
-	double left = static_cast<double>(obj1.num) / obj1.denom;
+Fraction operator>(const Fraction&obj1, const Fraction& obj2){
+
+
+	if (obj1.num / obj1.denom > obj2.num / obj2.denom){
+		return obj1;
+	}
+	else{
+		return obj2;
+	}
+
 }
