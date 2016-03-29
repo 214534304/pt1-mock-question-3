@@ -19,27 +19,24 @@ using namespace std;
 // 3.3 create a driver program to test your overloaded > operators and your overloaded functions
 
 class Fraction {
+	friend Fraction operator > (const Fraction &obj1, const Fraction &obj2);          //  overload the greater than operator and giving it access to the class members 
+	friend  Fraction add(int, Fraction);
+	friend  Fraction add(Fraction, int);
 private:
 	int num;				// numerator;
 	int denom;				// denominator;
+	int number1;
 public:
 	Fraction(int n, int d) : num(n), denom(d) { };
 
-	Fraction() : num(0), denom(0)
-	{
-	}
 	~Fraction(){
 	}
 	void print() { cout << num << "/" << denom; };
-
-	friend Fraction operator > (const Fraction &obj1, const Fraction &obj2);          //  overload the greater than operator and giving it access to the class members 
-
-	//overloading two functions called add to take two arguments
-
-  friend  Fraction add(int, Fraction);
-
-	friend	 Fraction add(Fraction, int);
+	//friend void set(int, Fraction);
+	
 };
+
+
 Fraction add(int number, Fraction a){
 	
 	a.num = number * a.denom + a.num;
@@ -53,14 +50,31 @@ Fraction add(Fraction b, int number){
 	return b;
 }
 
-Fraction operator>(const Fraction&obj1, const Fraction& obj2){
 
 
-	if (obj1.num / obj1.denom > obj2.num / obj2.denom){
-		return obj1;
-	}
-	else{
-		return obj2;
-	}
 
+int main(){
+	Fraction fraction1(6, 2);
+	
+	int number;
+
+	cout << "" << endl;
+
+	cout << "The greater fraction is:" << endl;
+
+    cout << "Enter an integer:" << endl;
+	cin >> number;
+
+	Fraction f = add(number, fraction1);
+	f.print();
+	cout << endl << endl;
+
+	fraction1 = add(f, number);
+	fraction1.print();
+	cout << endl;
+	
+
+	
+
+	return 0;
 }
